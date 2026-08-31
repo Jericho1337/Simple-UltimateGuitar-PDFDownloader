@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import Tab from "./Tab.jsx"
+import Document from "./PDFDocument.jsx"
 import './App.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { PDFViewer } from '@react-pdf/renderer';
 
 function App() {
 
@@ -12,6 +16,7 @@ function App() {
 
 	return (
 		<div className="App">
+			
 			<h1>Ultimate guitar PDF downloader</h1>
 			<div id="examples">
 				<input size="100" name="myInput" onChange={(newUrl) => {
@@ -20,7 +25,10 @@ function App() {
 					}}}/>
 			</div>
 			<Tab url={currentUrlTab} />
-		</div> 
+			<PDFViewer style={{ width: '100%', height: '90vh' }}>
+				<Document title="" />
+			</PDFViewer>
+		</div>	
 	);
 }
 
