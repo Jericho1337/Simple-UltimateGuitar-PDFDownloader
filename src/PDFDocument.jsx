@@ -1,5 +1,8 @@
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import RobotoMono from "./fonts/RobotoMono.ttf"
 
+
+Font.register({ family: 'Roboto Mono', src: RobotoMono});
 // Create styles
 const styles = StyleSheet.create({
   page: {
@@ -25,6 +28,7 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     marginTop: 20,
+    fontFamily: "Roboto Mono",
   },
 });
 
@@ -33,21 +37,11 @@ function PDFDocument(props){
     return(
         <Document>
             <Page size="A4" style={styles.page}>
-                <View style={styles.header}>
-                    <Text>Field Notes</Text>
-                    <Text>Issue 01</Text>
-                </View>
 
                 <Text style={styles.title}>Documents, written in React</Text>
 
                 <Text style={styles.paragraph}>
-                    Everything on this page is a component. View lays things out with
-                    flexbox, Text renders the copy, and StyleSheet keeps styling close to
-                    the CSS you already write.
-                </Text>
-                <Text style={styles.paragraph}>
-                    Edit any value above and the page redraws. No template language, no
-                    build step, just React.
+                    {props.tab}
                 </Text>
             </Page>
         </Document>
