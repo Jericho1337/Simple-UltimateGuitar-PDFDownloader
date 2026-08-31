@@ -1,5 +1,8 @@
 import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
 import RobotoMono from "./fonts/RobotoMono.ttf"
+import { useEffect, useState } from 'react';
+import axios from "axios";
+import * as cheerio from "cheerio";
 
 
 Font.register({ family: 'Roboto Mono', src: RobotoMono});
@@ -34,6 +37,34 @@ const styles = StyleSheet.create({
 
 // Create Document Component
 function PDFDocument(props){
+
+  const [data, setData] = useState([]); //RAW EXTRACTED DATA
+  const [loaded, setLoaded] = useState(false); //LOADED PAGE
+  const [jsData, setJsData] = useState(); //JS DATA
+
+   useEffect( () => {
+        console.log("Axios executed!");
+		axios({ method: "get", url: props.url })
+		.then(response => {setData(response.data); setLoaded(true)})
+	} , [props.url] );
+	
+	if(loaded){
+    try{
+        console.log("Loaded!");
+        const $ = cheerio.load(data);
+        const fullJson = JSON.parse( $("[data-content]").attr("data-content") );
+        const jsonTab = fullJson["store"]["page"]["data"]["tab_view"]["wiki_tab"]["content"]
+        let stringTab = JSON.stringify(jsonTab);
+        stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "").replaceAll("[/ch]","");
+
+        let jsonTabModified = JSON.parse(stringTab);
+        
+        setJsData(jsonTabModified);
+        setLoaded(false);
+    } catch (err){
+      console.error(err);
+    }
+	}
     return(
         <Document>
             <Page size="A4" style={styles.page}>
@@ -41,7 +72,7 @@ function PDFDocument(props){
                 <Text style={styles.title}>Documents, written in React</Text>
 
                 <Text style={styles.paragraph}>
-                    {props.tab}
+                    {jsData}
                 </Text>
             </Page>
         </Document>
