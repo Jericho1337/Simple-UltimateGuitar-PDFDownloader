@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     color: '#18181b',
     marginTop: 40,
     paddingBottom: 16,
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     borderBottomColor: '#e0301e',
   },
   paragraph: {
@@ -41,24 +41,25 @@ function PDFDocument(props){
   const [data, setData] = useState([]); //RAW EXTRACTED DATA
   const [loaded, setLoaded] = useState(false); //LOADED PAGE
   const [jsData, setJsData] = useState(); //JS DATA
+  const [songTitle, setSongTitle] = useState("");
 
    useEffect( () => {
-        console.log("Axios executed!");
 		axios({ method: "get", url: props.url })
 		.then(response => {setData(response.data); setLoaded(true)})
 	} , [props.url] );
 	
 	if(loaded){
     try{
-        console.log("Loaded!");
         const $ = cheerio.load(data);
         const fullJson = JSON.parse( $("[data-content]").attr("data-content") );
         const jsonTab = fullJson["store"]["page"]["data"]["tab_view"]["wiki_tab"]["content"]
+		const songTitle = fullJson["store"]["page"]["data"]["tab"]["song_name"];
         let stringTab = JSON.stringify(jsonTab);
         stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "").replaceAll("[/ch]","");
 
         let jsonTabModified = JSON.parse(stringTab);
         
+		setSongTitle(songTitle);
         setJsData(jsonTabModified);
         setLoaded(false);
     } catch (err){
@@ -69,8 +70,9 @@ function PDFDocument(props){
         <Document>
             <Page size="A4" style={styles.page}>
 
-                <Text style={styles.title}>Documents, written in React</Text>
-
+                <Text style={styles.title}>
+					{songTitle}
+				</Text>
                 <Text style={styles.paragraph}>
                     {jsData}
                 </Text>

@@ -8,17 +8,13 @@ function Tab(props){
 	const [loaded, setLoaded] = useState(false); //LOADED PAGE
 	const [jsData, setJsData] = useState(); //JS DATA
 
-    console.log("Tab executed!");
-
     useEffect( () => {
-        console.log("Axios executed!");
 		axios({ method: "get", url: props.url })
 		.then(response => {setData(response.data); setLoaded(true)})
 	} , [props.url] );
 	
 	if(loaded){
         try{
-            console.log("Loaded!");
             const $ = cheerio.load(data);
             const fullJson = JSON.parse( $("[data-content]").attr("data-content") );
             const jsonTab = fullJson["store"]["page"]["data"]["tab_view"]["wiki_tab"]["content"]
