@@ -6,7 +6,7 @@ function Tab(props){
 
     const [data, setData] = useState([]); //RAW EXTRACTED DATA
 	const [loaded, setLoaded] = useState(false); //LOADED PAGE
-	const [jsData, setJsData] = useState(); //JS DATA
+	const [jsonTabFormatted, setjsonTabFormatted] = useState(); //JS DATA
 
     useEffect( () => {
 		axios({ method: "get", url: props.url })
@@ -17,13 +17,13 @@ function Tab(props){
         try{
             const $ = cheerio.load(data);
             const fullJson = JSON.parse( $("[data-content]").attr("data-content") );
-            const jsonTab = fullJson["store"]["page"]["data"]["tab_view"]["wiki_tab"]["content"]
+            const jsonTab = fullJson["store"]["page"]["data"]["tab_view"]["wiki_tab"]["content"];
             let stringTab = JSON.stringify(jsonTab);
             stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "<b>").replaceAll("[/ch]","</b>");
 
             let jsonTabModified = JSON.parse(stringTab);
             
-            setJsData(jsonTabModified);
+            setjsonTabFormatted(jsonTabModified);
             setLoaded(false);
         } catch (err){
             console.error(err);
@@ -32,7 +32,7 @@ function Tab(props){
 
     return(
         <div id="tab-content">
-            {jsData !== undefined ? <pre><div dangerouslySetInnerHTML={{ __html: jsData }} /></pre> : <pre>Loading...</pre>}
+            {jsonTabFormatted !== undefined ? <pre><div dangerouslySetInnerHTML={{ __html: jsonTabFormatted }} /></pre> : <pre>Loading...</pre>}
         </div>	
     );
 }
