@@ -5,7 +5,7 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 
 
-Font.register({ family: 'Roboto Mono', src: RobotoMono});
+//Font.register({ family: 'Roboto Mono', src: RobotoMono});
 // Create styles
 const styles = StyleSheet.create({
   page: {
@@ -32,8 +32,13 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     marginTop: 20,
-    fontFamily: "Roboto Mono",
+    fontFamily: "Courier",
   },
+  bold: {
+    marginTop: 20,
+    fontFamily: "Courier-Bold",
+  },
+
 });
 
 // Create Document Component
@@ -43,6 +48,7 @@ function PDFDocument(props){
 	const [loaded, setLoaded] = useState(false); //LOADED PAGE
 	const [jsData, setJsData] = useState(); //JS DATA
 	const [songTitle, setSongTitle] = useState("");
+	const regexSplit = /(<b>.+?<\/b>)/;	
 
 	useEffect( () => {
 		axios({ method: "get", url: props.url })
@@ -56,9 +62,9 @@ function PDFDocument(props){
 			const jsonTab = fullJson["store"]["page"]["data"]["tab_view"]["wiki_tab"]["content"];
 			const songTitle = fullJson["store"]["page"]["data"]["tab"]["song_name"];
 			let stringTab = JSON.stringify(jsonTab);
-			stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "").replaceAll("[/ch]","");
-			const jsonTabModified = JSON.parse(stringTab);		
-			
+			stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "<b>").replaceAll("[/ch]","</b>");
+			const jsonTabModified = JSON.parse(stringTab);
+				
 
 			setSongTitle(songTitle);
 			setJsData(jsonTabModified);
@@ -75,9 +81,15 @@ function PDFDocument(props){
                 <Text style={styles.title}>
                   	{songTitle}
                 </Text>
-                <Text style={styles.paragraph}>
-					{jsData}
-                </Text>
+				<Text>
+					{/*Inline expression performs
+						1. Split text into array using <b>...</b> (includes splitting tags into split using parethesis for group reges)
+						2. Maps every element to a <Text>...</Text> element
+							2.1 If <b> is present style.bold is set else style.paragraph is used
+							2.2 <b> and </b> are removed with replaceAll function before inserting into array
+						3. If data is not yet loaded a placeholder <Text>Loading...</Text> is shown */}
+					{jsData !== undefined ? jsData.split(regexSplit).map( (item, index) => (<Text key={index} style={item.includes("<b>") ? styles.bold : styles.paragraph}>{item.replaceAll("<b>", "").replaceAll("</b>","")}</Text>)) : <Text>Loading...</Text>}
+				</Text>
             </Page>
         </Document>
     );
