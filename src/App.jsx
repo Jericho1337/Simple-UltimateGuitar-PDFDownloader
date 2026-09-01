@@ -9,8 +9,8 @@ function App() {
 	//URL DEFAULT PARAMETERS
 	const CORSproxy = "https://proxy.corsfix.com/"; //THROTTLING TO 60 req/minute
 	const defaultTab = "https://tabs.ultimate-guitar.com/tab/misc-computer-games/clair-obscur-expedition-33-lumiere-chords-5776982";
-	//STATE
-	const [currentUrlTab, setCurrentUrlTab] = useState(CORSproxy + defaultTab);
+	const fullDefaultTab = CORSproxy + defaultTab;
+	const [currentUrlTab, setCurrentUrlTab] = useState(fullDefaultTab);
 
 	return (
 		<div className="App">
@@ -23,7 +23,7 @@ function App() {
 			</header>
 			<div id="inputTab">
 				<input style={{width: '100%'}} placeholder={defaultTab} onChange={(newUrl) => {
-						if(JSON.stringify(newUrl["nativeEvent"]["data"]).includes("tabs.ultimate-guitar.com")) {
+						if(JSON.stringify(newUrl["nativeEvent"]["data"]).includes("https://tabs.ultimate-guitar.com")) {
 							setCurrentUrlTab(CORSproxy + newUrl["nativeEvent"]["data"])
 						}}}/>
 			</div>

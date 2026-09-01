@@ -22,12 +22,13 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   title: {
-    fontSize: 26,
+    fontSize: 20,
+	textAlign: "center",
     color: '#18181b',
-    marginTop: 40,
+    marginTop: 10,
     paddingBottom: 16,
-    borderBottomWidth: 2,
-    borderBottomColor: '#e0301e',
+    borderBottomWidth: 1,
+    borderBottomColor: '#000000',
   },
   paragraph: {
     marginTop: 20,
@@ -38,43 +39,44 @@ const styles = StyleSheet.create({
 // Create Document Component
 function PDFDocument(props){
 
-  const [data, setData] = useState([]); //RAW EXTRACTED DATA
-  const [loaded, setLoaded] = useState(false); //LOADED PAGE
-  const [jsData, setJsData] = useState(); //JS DATA
-  const [songTitle, setSongTitle] = useState("");
+	const [data, setData] = useState([]); //RAW EXTRACTED DATA
+	const [loaded, setLoaded] = useState(false); //LOADED PAGE
+	const [jsData, setJsData] = useState(); //JS DATA
+	const [songTitle, setSongTitle] = useState("");
 
-   useEffect( () => {
+	useEffect( () => {
 		axios({ method: "get", url: props.url })
 		.then(response => {setData(response.data); setLoaded(true)})
 	} , [props.url] );
 	
 	if(loaded){
-    try{
-        const $ = cheerio.load(data);
-        const fullJson = JSON.parse( $("[data-content]").attr("data-content") );
-        const jsonTab = fullJson["store"]["page"]["data"]["tab_view"]["wiki_tab"]["content"]
-		const songTitle = fullJson["store"]["page"]["data"]["tab"]["song_name"];
-        let stringTab = JSON.stringify(jsonTab);
-        stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "").replaceAll("[/ch]","");
+		try{
+			const $ = cheerio.load(data);
+			const fullJson = JSON.parse( $("[data-content]").attr("data-content") );
+			const jsonTab = fullJson["store"]["page"]["data"]["tab_view"]["wiki_tab"]["content"];
+			const songTitle = fullJson["store"]["page"]["data"]["tab"]["song_name"];
+			let stringTab = JSON.stringify(jsonTab);
+			stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "").replaceAll("[/ch]","");
+			const jsonTabModified = JSON.parse(stringTab);		
+			
 
-        let jsonTabModified = JSON.parse(stringTab);
-        
-		setSongTitle(songTitle);
-        setJsData(jsonTabModified);
-        setLoaded(false);
-    } catch (err){
-      console.error(err);
-    }
+			setSongTitle(songTitle);
+			setJsData(jsonTabModified);
+			setLoaded(false);
+			
+		} catch (err){
+      		console.error(err);
+    	}
+		
 	}
     return(
         <Document>
             <Page size="A4" style={styles.page}>
-
                 <Text style={styles.title}>
-					{songTitle}
-				</Text>
+                  	{songTitle}
+                </Text>
                 <Text style={styles.paragraph}>
-                    {jsData}
+					{jsData}
                 </Text>
             </Page>
         </Document>
