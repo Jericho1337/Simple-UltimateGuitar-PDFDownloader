@@ -82,6 +82,7 @@ header p {
   background-color: #2d3942;
   border-radius: 0 4px 4px 4px;
   padding: 1rem;
+  overflow: hidden;
 }
 
 #tab-content li {
