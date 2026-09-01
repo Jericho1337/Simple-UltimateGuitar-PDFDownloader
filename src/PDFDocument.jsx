@@ -1,5 +1,4 @@
 import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
-import RobotoMono from "./fonts/RobotoMono.ttf"
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import * as cheerio from "cheerio";
@@ -26,9 +25,7 @@ const styles = StyleSheet.create({
 	textAlign: "center",
     color: '#18181b',
     marginTop: 10,
-    paddingBottom: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#000000',
+    
   },
   paragraph: {
     marginTop: 20,
@@ -37,6 +34,13 @@ const styles = StyleSheet.create({
   bold: {
     marginTop: 20,
     fontFamily: "Courier-Bold",
+  },
+  subtitle: {
+    marginTop: 10,
+    fontFamily: "Courier",
+	textAlign: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: '#000000',
   },
 
 });
@@ -48,6 +52,7 @@ function PDFDocument(props){
 	const [loaded, setLoaded] = useState(false); //LOADED PAGE
 	const [jsData, setJsData] = useState(); //JS DATA
 	const [songTitle, setSongTitle] = useState("");
+	const [songArtist, setSongArtist] = useState("");
 	const regexSplit = /(<b>.+?<\/b>)/;	
 
 	useEffect( () => {
@@ -60,13 +65,14 @@ function PDFDocument(props){
 			const $ = cheerio.load(data);
 			const fullJson = JSON.parse( $("[data-content]").attr("data-content") );
 			const jsonTab = fullJson["store"]["page"]["data"]["tab_view"]["wiki_tab"]["content"];
-			const songTitle = fullJson["store"]["page"]["data"]["tab"]["song_name"];
+			const songTitleJson = fullJson["store"]["page"]["data"]["tab"]["song_name"];
+			const songArtistJson = fullJson["store"]["page"]["data"]["tab"]["artist_name"];
 			let stringTab = JSON.stringify(jsonTab);
 			stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "<b>").replaceAll("[/ch]","</b>");
 			const jsonTabModified = JSON.parse(stringTab);
 				
-
-			setSongTitle(songTitle);
+			setSongTitle(songTitleJson);
+			setSongArtist(songArtistJson);
 			setJsData(jsonTabModified);
 			setLoaded(false);
 			
@@ -81,6 +87,10 @@ function PDFDocument(props){
                 <Text style={styles.title}>
                   	{songTitle}
                 </Text>
+				<Text style={styles.subtitle}>
+                  	{songArtist}
+                </Text>
+
 				<Text>
 					{/*Inline expression performs
 						1. Split text into array using <b>...</b> (includes splitting tags into split using parethesis for group reges)
