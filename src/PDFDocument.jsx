@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
 	textAlign: "center",
     color: '#18181b',
-    marginTop: 10,
     
   },
   paragraph: {
@@ -37,6 +36,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     marginTop: 10,
+	marginBottom: 10,
     fontFamily: "Courier",
 	textAlign: "center",
     borderBottomWidth: 1,
