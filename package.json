@@ -8,8 +8,8 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "preview:worker": "npm run build && wrangler dev",
-    "deploy:worker": "npm run build && wrangler deploy"
+    "preview:worker": "npm run build && wrangler pages dev dist",
+    "deploy:worker": "npm run build && wrangler pages deploy dist"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.9.0",

@@ -4,11 +4,12 @@ import Document from "./PDFDocument.jsx"
 import './App.css';
 import { PDFViewer } from '@react-pdf/renderer';
 
+
 function App() {
 
 	//URL DEFAULT PARAMETERS
 	//const CORSproxy = "https://proxy.corsfix.com/"; //THROTTLING TO 60 req/minute
-	const CORSproxy = "";
+	const CORSproxy = "/ug?url=";
 	const defaultTab = "https://tabs.ultimate-guitar.com/tab/misc-computer-games/clair-obscur-expedition-33-lumiere-chords-5776982";
 	const fullDefaultTab = CORSproxy + defaultTab;
 	const [currentUrlTab, setCurrentUrlTab] = useState(fullDefaultTab);
