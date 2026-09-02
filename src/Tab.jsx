@@ -40,7 +40,7 @@ function Tab(props){
     return(
         <div id="tab-content">
             <h2>{songTitle}</h2>
-            <h3>{songArtist}</h3>
+            <h4>{songArtist}</h4>
             {jsonTabFormatted !== undefined ? <pre><div dangerouslySetInnerHTML={{ __html: jsonTabFormatted }} /></pre> : <pre>Loading...</pre>}
         </div>	
     );

@@ -7,7 +7,8 @@ import { PDFViewer } from '@react-pdf/renderer';
 function App() {
 
 	//URL DEFAULT PARAMETERS
-	const CORSproxy = "https://proxy.corsfix.com/"; //THROTTLING TO 60 req/minute
+	//const CORSproxy = "https://proxy.corsfix.com/"; //THROTTLING TO 60 req/minute
+	const CORSproxy = "";
 	const defaultTab = "https://tabs.ultimate-guitar.com/tab/misc-computer-games/clair-obscur-expedition-33-lumiere-chords-5776982";
 	const fullDefaultTab = CORSproxy + defaultTab;
 	const [currentUrlTab, setCurrentUrlTab] = useState(fullDefaultTab);
@@ -19,8 +20,8 @@ function App() {
 					<h1>Simple Ultimate guitar PDF downloader</h1>
 					<p>A simple ultimate guitar pdf downloader</p>
 				</div>
-				
 			</header>
+			
 			<div id="inputTab">
 				<input style={{width: '100%'}} placeholder={defaultTab} onChange={(newUrl) => {
 						if(JSON.stringify(newUrl["nativeEvent"]["data"]).includes("https://tabs.ultimate-guitar.com")) {
