@@ -3,6 +3,7 @@ import Tab from "./Tab.jsx"
 import Document from "./PDFDocument.jsx"
 import '../styles/App.css';
 import { PDFViewer } from '@react-pdf/renderer';
+import Navbar from './Navbar.jsx';
 
 
 function App() {
@@ -16,6 +17,10 @@ function App() {
 
 	return (
 		<div className="App">
+			<div>
+				<Navbar />
+			</div>
+
 			<header>
 				<div>
 					<h1>Simple Ultimate guitar PDF downloader</h1>
