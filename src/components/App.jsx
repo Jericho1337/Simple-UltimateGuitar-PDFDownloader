@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Tab from "./Tab.jsx"
 import Document from "./PDFDocument.jsx"
-import './App.css';
+import '../styles/App.css';
 import { PDFViewer } from '@react-pdf/renderer';
 
 

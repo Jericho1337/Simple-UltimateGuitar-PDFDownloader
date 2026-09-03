@@ -3,8 +3,6 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import * as cheerio from "cheerio";
 
-
-//Font.register({ family: 'Roboto Mono', src: RobotoMono});
 // Create styles
 const styles = StyleSheet.create({
   page: {
