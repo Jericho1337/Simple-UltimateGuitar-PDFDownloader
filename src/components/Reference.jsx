@@ -1,7 +1,7 @@
 import '../styles/Navbar.css';
 import githubIcon from "../assets/githubicon.png"
 
-function Navbar() {
+function Reference() {
     return (
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
             <a href="https://github.com/Jericho1337/Simple-UltimateGuitar-PDFDownloader">
@@ -11,4 +11,4 @@ function Navbar() {
     );
 };
 
-export default Navbar;
+export default Reference;

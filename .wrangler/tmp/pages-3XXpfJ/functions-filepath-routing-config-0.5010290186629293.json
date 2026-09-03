@@ -1,0 +1,13 @@
+{
+  "routes": [
+    {
+      "routePath": "/ug",
+      "mountPath": "/",
+      "method": "",
+      "module": [
+        "ug.js:onRequest"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}
