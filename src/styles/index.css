@@ -1,6 +1,3 @@
-@import "tailwindcss";
-
-
 * {
   box-sizing: border-box;
 }
@@ -67,8 +64,15 @@ header p {
   color: #273133;
 }
 
+#paragraphInputTab{
+  margin: 0rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #inputTab{
-    margin: 2rem 0;
+    margin: 0 0 1rem 0;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -3,7 +3,7 @@ function Header(){
     return(
        <header>
             <div>
-                <h1 class="text-3xl font-bold underline">Simple Ultimate Guitar PDF downloader</h1>
+                <h1>Simple Ultimate Guitar PDF downloader</h1>
                 <p>A simple ultimate guitar pdf downloader</p>
             </div>
 		</header> 

@@ -17,6 +17,11 @@ function App() {
 		<div className="App">
 			<Reference /> {/*Github image reference*/}
 			<Header /> {/*Header Title*/}
+			
+			<div id="paragraphInputTab">
+				<b>Input URL in the field below</b>
+			</div>
+
 			<div id="inputTab">
 				<input style={{width: '100%'}} placeholder={defaultTab} onChange={(newUrl) => {
 					if(JSON.stringify(newUrl["nativeEvent"]["data"]).includes("https://tabs.ultimate-guitar.com")) {
@@ -24,6 +29,7 @@ function App() {
 					}}}
 				/>
 			</div>
+			
 			<Tab url={currentUrlTab} /> {/*HTML TAB*/}
 			<PDFDocument url={currentUrlTab} /> {/*PDF Document Preview*/}
 		</div>	
