@@ -31,6 +31,12 @@ function App() {
 				/>
 			</div>
 			
+			<div id="tabs">
+				<label style={{padding: "8px"}}>Transpose: {transposeOffset}</label>
+				<button onClick={() => (transposeOffset < 11 ? setTransposeOffset(transposeOffset + 1) : null)}>+</button>
+				<button onClick={() => (transposeOffset > -11 ? setTransposeOffset(transposeOffset - 1) : null)}>-</button>
+			</div>
+
 			<Tab url={currentUrlTab} transposeOffset={transposeOffset}/> {/*HTML TAB*/}
 			<PDFDocument url={currentUrlTab} transposeOffset={transposeOffset} /> {/*PDF Document Preview*/}
 		</div>	

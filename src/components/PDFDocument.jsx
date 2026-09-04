@@ -57,12 +57,23 @@ function PDFDocument(props){
 	const [jsData, setJsData] = useState(); //JS DATA
 	const [songTitle, setSongTitle] = useState("");
 	const [songArtist, setSongArtist] = useState("");
+	const [currentTransposeOffset, setCurrentTransposeOffset] = useState(0);
+    const [currentUrl, setCurrentUrl] = useState("");
 	const regexSplit = /(<b>.+?<\/b>)/;	
 
-	useEffect( () => {
-		axios({ method: "get", url: props.url })
-		.then(response => {setData(response.data); setLoaded(true)})
-	} , [props.url] );
+    useEffect( () =>  
+        {
+            if(props.url !== currentUrl){
+                axios({ method: "get", url: props.url })
+                .then(response => {setData(response.data); setLoaded(true); setCurrentUrl(props.url)})
+            }
+            else if(props.transposeOffset !== currentTransposeOffset){
+                setCurrentTransposeOffset(props.transposeOffset)
+                setLoaded(true); 
+                setCurrentUrl(props.url);
+            }
+            
+	    } , [props.url, props.transposeOffset] );
 	
 	if(loaded){
 		try{
