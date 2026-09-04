@@ -1,4 +1,3 @@
-import '../styles/Navbar.css';
 import githubIcon from "../assets/githubicon.png"
 
 function Reference() {

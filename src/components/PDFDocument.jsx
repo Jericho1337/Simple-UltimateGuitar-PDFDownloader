@@ -2,6 +2,7 @@ import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/rendere
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import * as cheerio from "cheerio";
+import { PDFViewer } from '@react-pdf/renderer';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -80,26 +81,28 @@ function PDFDocument(props){
 		
 	}
     return(
-        <Document>
-            <Page size="A4" style={styles.page}>
-                <Text style={styles.title}>
-                  	{songTitle}
-                </Text>
-				<Text style={styles.subtitle}>
-                  	{songArtist}
-                </Text>
+		<PDFViewer style={{ width: '100%', height: '90vh', margin: "2em 0" }}>
+			<Document>
+				<Page size="A4" style={styles.page}>
+					<Text style={styles.title}>
+						{songTitle}
+					</Text>
+					<Text style={styles.subtitle}>
+						{songArtist}
+					</Text>
 
-				<Text>
-					{/*Inline expression performs
-						1. Split text into array using <b>...</b> (includes splitting tags into split using parethesis for group reges)
-						2. Maps every element to a <Text>...</Text> element
-							2.1 If <b> is present style.bold is set else style.paragraph is used
-							2.2 <b> and </b> are removed with replaceAll function before inserting into array
-						3. If data is not yet loaded a placeholder <Text>Loading...</Text> is shown */}
-					{jsData !== undefined ? jsData.split(regexSplit).map( (item, index) => (<Text key={index} style={item.includes("<b>") ? styles.bold : styles.paragraph}>{item.replaceAll("<b>", "").replaceAll("</b>","")}</Text>)) : <Text>Loading...</Text>}
-				</Text>
-            </Page>
-        </Document>
+					<Text>
+						{/*Inline expression performs
+							1. Split text into array using <b>...</b> (includes splitting tags into split using parethesis for group reges)
+							2. Maps every element to a <Text>...</Text> element
+								2.1 If <b> is present style.bold is set else style.paragraph is used
+								2.2 <b> and </b> are removed with replaceAll function before inserting into array
+							3. If data is not yet loaded a placeholder <Text>Loading...</Text> is shown */}
+						{jsData !== undefined ? jsData.split(regexSplit).map( (item, index) => (<Text key={index} style={item.includes("<b>") ? styles.bold : styles.paragraph}>{item.replaceAll("<b>", "").replaceAll("</b>","")}</Text>)) : <Text>Loading...</Text>}
+					</Text>
+				</Page>
+			</Document>
+		</PDFViewer>
     );
 }
 

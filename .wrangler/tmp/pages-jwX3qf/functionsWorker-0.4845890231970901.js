@@ -942,7 +942,7 @@ async function onRequest(context2) {
 }
 __name(onRequest, "onRequest");
 
-// ../.wrangler/tmp/pages-Ai34jL/functionsRoutes-0.687593694153824.mjs
+// ../.wrangler/tmp/pages-jwX3qf/functionsRoutes-0.03656441135760169.mjs
 var routes = [
   {
     routePath: "/ug",
