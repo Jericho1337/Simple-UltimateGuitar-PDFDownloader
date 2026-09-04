@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { PDFViewer } from '@react-pdf/renderer';
+import { transposeTab } from './TransposeUtils.js';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -67,6 +68,7 @@ function PDFDocument(props){
 			const songTitleJson = fullJson["store"]["page"]["data"]["tab"]["song_name"];
 			const songArtistJson = fullJson["store"]["page"]["data"]["tab"]["artist_name"];
 			let stringTab = JSON.stringify(jsonTab);
+			stringTab = transposeTab(stringTab, props.transposeOffset);
 			stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "<b>").replaceAll("[/ch]","</b>");
 			const jsonTabModified = JSON.parse(stringTab);
 				

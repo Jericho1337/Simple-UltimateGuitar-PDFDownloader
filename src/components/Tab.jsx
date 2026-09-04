@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from "axios";
 import * as cheerio from "cheerio";
+import { transposeTab } from './TransposeUtils.js';
 
 function Tab(props){
 
@@ -23,6 +24,7 @@ function Tab(props){
             const songTitleJson = fullJson["store"]["page"]["data"]["tab"]["song_name"];
 			const songArtistJson = fullJson["store"]["page"]["data"]["tab"]["artist_name"];
             let stringTab = JSON.stringify(jsonTab);
+            stringTab = transposeTab(stringTab, props.transposeOffset);
             stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "<b>").replaceAll("[/ch]","</b>");
 
             let jsonTabModified = JSON.parse(stringTab);
