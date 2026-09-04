@@ -12,7 +12,7 @@ function App() {
 	const defaultTab = "https://tabs.ultimate-guitar.com/tab/misc-computer-games/clair-obscur-expedition-33-lumiere-chords-5776982";
 	const fullDefaultTab = CORSproxy + defaultTab;
 	const [currentUrlTab, setCurrentUrlTab] = useState(fullDefaultTab);
-	const [transposeOffset, setTransposeOffset] = useState(-2);
+	const [transposeOffset, setTransposeOffset] = useState(0);
 
 	return (
 		<div className="App">

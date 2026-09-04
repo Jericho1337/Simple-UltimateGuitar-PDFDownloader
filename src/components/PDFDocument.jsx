@@ -27,11 +27,15 @@ const styles = StyleSheet.create({
     
   },
   paragraph: {
-    marginTop: 20,
+    margin: 0,
+	padding: 0,
     fontFamily: "Courier",
+	lineHeight: 0
   },
   bold: {
-    marginTop: 20,
+    margin: 0,
+	padding: 0,
+	lineHeight: 0,
     fontFamily: "Courier-Bold",
   },
   subtitle: {
