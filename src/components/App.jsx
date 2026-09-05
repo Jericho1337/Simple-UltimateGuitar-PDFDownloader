@@ -2,8 +2,7 @@ import { useState } from 'react'
 import Tab from "./Tab.jsx"
 import Reference from './Reference.jsx';
 import Header from './Header.jsx';
-import PDFDocument from './PDFDocument.jsx';
-
+import PDF from './PDF.jsx';
 
 function App() {
 
@@ -38,7 +37,7 @@ function App() {
 			</div>
 
 			<Tab url={currentUrlTab} transposeOffset={transposeOffset}/> {/*HTML TAB*/}
-			<PDFDocument url={currentUrlTab} transposeOffset={transposeOffset} /> {/*PDF Document Preview*/}
+			<PDF url={currentUrlTab} transposeOffset={transposeOffset} /> {/*PDF Document Preview*/}
 		</div>	
 	);
 }

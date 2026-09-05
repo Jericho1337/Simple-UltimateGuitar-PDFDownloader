@@ -61,6 +61,34 @@ header p {
   width: 30px
 }
 
+#pdf-tabs{
+  margin: 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#pdf-tabs button:hover,
+#pdf-tabs button.active {
+  background-color: #48d9f3;
+  color: #273133;
+}
+
+#pdf-tabs button {
+  margin: 0.20rem 0.20rem;
+  font: inherit;
+  font-size: 1rem;
+  background-color: #282f33;
+  border: none;
+  border-bottom-color: #48d9f3;
+  color: #e0eff1;
+  border-radius: 4px 4px 4px 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  padding: 0px;
+}
+
+
 #tabs button:hover,
 #tabs button.active {
   background-color: #48d9f3;

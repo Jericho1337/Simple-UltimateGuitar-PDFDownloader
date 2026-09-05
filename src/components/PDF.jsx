@@ -1,8 +1,7 @@
-import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import { Page, Text, Document, StyleSheet, PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { PDFViewer } from '@react-pdf/renderer';
 import { transposeTab } from './TransposeUtils.js';
 
 // Create styles
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
   },
 
 });
+
 
 // Create Document Component
 function PDFDocument(props){
@@ -98,29 +98,52 @@ function PDFDocument(props){
 		
 	}
     return(
-		<PDFViewer style={{ width: '100%', height: '90vh', margin: "2em 0" }}>
-			<Document>
-				<Page size="A4" style={styles.page}>
-					<Text style={styles.title}>
-						{songTitle}
-					</Text>
-					<Text style={styles.subtitle}>
-						{songArtist}
-					</Text>
+		<Document>
+			<Page size="A4" style={styles.page}>
+				<Text style={styles.title}>
+					{songTitle}
+				</Text>
+				<Text style={styles.subtitle}>
+					{songArtist}
+				</Text>
 
-					<Text>
-						{/*Inline expression performs
-							1. Split text into array using <b>...</b> (includes splitting tags into split using parethesis for group reges)
-							2. Maps every element to a <Text>...</Text> element
-								2.1 If <b> is present style.bold is set else style.paragraph is used
-								2.2 <b> and </b> are removed with replaceAll function before inserting into array
-							3. If data is not yet loaded a placeholder <Text>Loading...</Text> is shown */}
-						{jsData !== undefined ? jsData.split(regexSplit).map( (item, index) => (<Text key={index} style={item.includes("<b>") ? styles.bold : styles.paragraph}>{item.replaceAll("<b>", "").replaceAll("</b>","")}</Text>)) : <Text>Loading...</Text>}
-					</Text>
-				</Page>
-			</Document>
-		</PDFViewer>
+				<Text>
+					{/*Inline expression performs
+						1. Split text into array using <b>...</b> (includes splitting tags into split using parethesis for group reges)
+						2. Maps every element to a <Text>...</Text> element
+							2.1 If <b> is present style.bold is set else style.paragraph is used
+							2.2 <b> and </b> are removed with replaceAll function before inserting into array
+						3. If data is not yet loaded a placeholder <Text>Loading...</Text> is shown */}
+					{jsData !== undefined ? jsData.split(regexSplit).map( (item, index) => (<Text key={index} style={item.includes("<b>") ? styles.bold : styles.paragraph}>{item.replaceAll("<b>", "").replaceAll("</b>","")}</Text>)) : <Text>Loading...</Text>}
+				</Text>
+			</Page>
+		</Document>
     );
 }
 
-export default PDFDocument;
+function PDF(props){
+	return(
+		<div>
+			<div id="pdf-tabs">
+				<button>
+					<PDFDownloadLink document={<PDFDocument url={props.url} transposeOffset={props.transposeOffset} />}  style={{color: "#e0eff1"}} fileName="tab.pdf">
+						{({ loading }) => (loading ? 'Preparing document...' : 'Download PDF')}
+					</PDFDownloadLink>
+				</button>
+			</div>
+
+			<hr />
+			
+			<div id="paragraphInputTab">
+				<b>Preview</b>
+			</div>
+			<div id="tabs">
+				<PDFViewer style={{ width: '100%', height: '90vh', margin: "0em 0" }}>
+					<PDFDocument url={props.url} transposeOffset={props.transposeOffset} />
+				</PDFViewer>
+			</div>
+		</div>
+	);
+}
+
+export default PDF;
