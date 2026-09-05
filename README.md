@@ -3,7 +3,8 @@
 **Simple-UltimateGuitar-PDFDownloader** is a simple app written in React for practices.
 It enables you to:
 * View guitar tabs on ultimate guitar
-* Preview PDF and Download through the previewr
+* Download PDF tab
+* Preview PDF tab
 
 ![alt text](./docs/siteview1.png)
 ![alt text](./docs/siteview2.png)
