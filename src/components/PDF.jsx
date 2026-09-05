@@ -135,7 +135,7 @@ function PDF(props){
 			<hr />
 			
 			<div id="paragraphInputTab">
-				<b>Preview</b>
+				<b>Preview (supported on PC)</b>
 			</div>
 			<div id="tabs">
 				<PDFViewer style={{ width: '100%', height: '90vh', margin: "0em 0" }}>
