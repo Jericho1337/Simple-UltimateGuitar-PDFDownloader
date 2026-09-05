@@ -23,3 +23,4 @@ Just input the URL of your tab in the input field and page will automatically re
 * [ ] Page space optimization (reduce number of pages)
 * [ ] Modern style for webpage
 * [ ] Possibility to add or remove chord and meta information (key, tuning, ...)
+* [ ] Latin chords conversion
