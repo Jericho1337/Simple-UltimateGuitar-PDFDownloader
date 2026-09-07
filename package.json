@@ -12,6 +12,9 @@
     "deploy:worker": "npm run build && wrangler pages deploy dist"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^9.4.0",
     "@react-pdf/renderer": "^4.9.0",
     "@tailwindcss/vite": "^4.3.3",
     "cheerio": "^1.2.0",

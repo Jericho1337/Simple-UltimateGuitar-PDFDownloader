@@ -3,6 +3,11 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { transposeTab } from './TransposeUtils.js';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import theme from './DefaultTheme.jsx';
+import { Typography } from '@mui/material';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -123,26 +128,21 @@ function PDFDocument(props){
 
 function PDF(props){
 	return(
-		<div>
-			<div id="pdf-tabs">
-				<button>
-					<PDFDownloadLink document={<PDFDocument url={props.url} transposeOffset={props.transposeOffset} />}  style={{color: "#e0eff1"}} fileName="tab.pdf">
-						{({ loading }) => (loading ? 'Preparing document...' : 'Download PDF')}
-					</PDFDownloadLink>
-				</button>
-			</div>
+		 <Card sx={{bgcolor: theme["palette"]["overbackground"]}}>
+             <CardContent>
+				<Grid></Grid>
+				<Typography gutterBottom variant="h5" component="div" sx={{color: theme["palette"]["text"]}}>Preview (supported on PC) & Download</Typography>
 
-			<hr />
-			
-			<div id="paragraphInputTab">
-				<b>Preview (supported on PC)</b>
-			</div>
-			<div id="tabs">
-				<PDFViewer style={{ width: '100%', height: '90vh', margin: "0em 0" }}>
+				<PDFDownloadLink style={{color: theme["palette"]["text"]}} document={<PDFDocument url={props.url} transposeOffset={props.transposeOffset} />} fileName="tab.pdf">
+					{({ loading }) => (loading ? 'Preparing document...' : 'Download PDF')}
+				</PDFDownloadLink>
+
+				<PDFViewer style={{ width: '100%', height: '100vh', margin: "0em 0" }}>
 					<PDFDocument url={props.url} transposeOffset={props.transposeOffset} />
 				</PDFViewer>
-			</div>
-		</div>
+			</CardContent>
+		</Card>
+
 	);
 }
 

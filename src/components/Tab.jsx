@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react'
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { transposeTab } from './TransposeUtils.js';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import theme from './DefaultTheme.jsx';
 
 function Tab(props){
 
@@ -52,11 +56,19 @@ function Tab(props){
 	}
 
     return(
-        <div id="tab-content">
-            <h2>{songTitle}</h2>
-            <h4>{songArtist}</h4>
-            {jsonTabFormatted !== undefined ? <pre><div dangerouslySetInnerHTML={{ __html: jsonTabFormatted }} /></pre> : <pre>Loading...</pre>}
-        </div>	
+        <Card sx={{bgcolor: theme["palette"]["overbackground"]}}>
+             <CardContent>
+                <Typography gutterBottom variant="h5" component="div" sx={{color: theme["palette"]["text"]}}>
+                    {songTitle}
+                </Typography>
+                <Typography variant="h6" component="div" sx={{color: theme["palette"]["text"]}}>
+                    {songArtist}
+                </Typography>
+                <Typography component="div" sx={{color: theme["palette"]["text"]}}>
+                    {jsonTabFormatted !== undefined ? <pre><div dangerouslySetInnerHTML={{ __html: jsonTabFormatted }} /></pre> : <pre>Loading...</pre>}
+                </Typography>
+            </CardContent>
+        </Card>  
     );
 }
 
