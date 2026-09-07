@@ -130,16 +130,21 @@ function PDF(props){
 	return(
 		 <Card sx={{bgcolor: theme["palette"]["overbackground"]}}>
              <CardContent>
-				<Grid></Grid>
-				<Typography gutterBottom variant="h5" component="div" sx={{color: theme["palette"]["text"]}}>Preview (supported on PC) & Download</Typography>
-
-				<PDFDownloadLink style={{color: theme["palette"]["text"]}} document={<PDFDocument url={props.url} transposeOffset={props.transposeOffset} />} fileName="tab.pdf">
-					{({ loading }) => (loading ? 'Preparing document...' : 'Download PDF')}
-				</PDFDownloadLink>
-
-				<PDFViewer style={{ width: '100%', height: '100vh', margin: "0em 0" }}>
-					<PDFDocument url={props.url} transposeOffset={props.transposeOffset} />
-				</PDFViewer>
+				<Grid container spacing={2}>
+					<Grid size={12} style={{textAlign: "center"}}>
+						<Typography gutterBottom variant="h5" component="div" sx={{color: theme["palette"]["text"]}}>Preview (supported on PC) & Download</Typography>
+					</Grid>
+					<Grid size={12} style={{textAlign: "center"}}>
+						<PDFDownloadLink style={{color: theme["palette"]["headermain"]}} document={<PDFDocument url={props.url} transposeOffset={props.transposeOffset} />} fileName="tab.pdf">
+							{({ loading }) => (loading ? 'Preparing document...' : 'Download PDF')}
+						</PDFDownloadLink>
+					</Grid>
+					<Grid size={12}>
+						<PDFViewer style={{ width: '100%', height: '100vh', margin: "0em 0" }}>
+							<PDFDocument url={props.url} transposeOffset={props.transposeOffset} />
+						</PDFViewer>
+					</Grid>
+				</Grid>
 			</CardContent>
 		</Card>
 
