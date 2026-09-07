@@ -17,7 +17,7 @@ You can use the slider to transpose the chord
 
 ## Usage (self-hosted)
 To host it yourself you need to install dependencies and use a CORS Plugin extension
-This extensions: https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf
+This extensions is recommended: https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf
 
 ## Features
 * [X] Chord Transposer
