@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Slider from '@mui/material/Slider';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import theme from "./DefaultTheme.jsx"
+import theme from "./DefaultTheme.js"
 
 function App() {
 

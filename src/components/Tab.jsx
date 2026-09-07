@@ -5,7 +5,7 @@ import { transposeTab } from './TransposeUtils.js';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import theme from './DefaultTheme.jsx';
+import theme from './DefaultTheme.js';
 
 function Tab(props){
 

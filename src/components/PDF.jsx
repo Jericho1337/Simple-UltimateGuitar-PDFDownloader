@@ -6,7 +6,7 @@ import { transposeTab } from './TransposeUtils.js';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import theme from './DefaultTheme.jsx';
+import theme from './DefaultTheme.js';
 import { Typography } from '@mui/material';
 
 // Create styles

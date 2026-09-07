@@ -3,7 +3,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import githubIcon from '../assets/githubicon.png';
-import theme from './DefaultTheme.jsx';
+import theme from './DefaultTheme.js';
 
 function TopAppBar() {
 	return (
