@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     margin: 0,
 	padding: 0,
     fontFamily: "Courier",
-	lineHeight: 0
+	lineHeight: 0,
   },
   bold: {
     margin: 0,
@@ -91,11 +91,14 @@ function PDFDocument(props){
 			stringTab = transposeTab(stringTab, props.transposeOffset);
 			stringTab = stringTab.replaceAll("[tab]", "").replaceAll("[/tab]", "").replaceAll("[ch]", "<b>").replaceAll("[/ch]","</b>");
 			const jsonTabModified = JSON.parse(stringTab);
-				
+			console.log(jsonTabModified);
+			console.log(jsonTabModified.split(regexSplit));
+
 			setSongTitle(songTitleJson);
 			setSongArtist(songArtistJson);
 			setJsData(jsonTabModified);
 			setLoaded(false);
+			
 			
 		} catch (err){
       		console.error(err);
@@ -118,8 +121,9 @@ function PDFDocument(props){
 						2. Maps every element to a <Text>...</Text> element
 							2.1 If <b> is present style.bold is set else style.paragraph is used
 							2.2 <b> and </b> are removed with replaceAll function before inserting into array
-						3. If data is not yet loaded a placeholder <Text>Loading...</Text> is shown */}
-					{jsData !== undefined ? jsData.split(regexSplit).map( (item, index) => (<Text key={index} style={item.includes("<b>") ? styles.bold : styles.paragraph}>{item.replaceAll("<b>", "").replaceAll("</b>","")}</Text>)) : <Text>Loading...</Text>}
+						3. If data is not yet loaded a placeholder <Text>Loading...</Text> is shown 
+						4. \u00A0 Forces whitespaces at the beg*/}
+					{jsData !== undefined ? jsData.split(regexSplit).map( (item, index) => (<Text key={index} style={item.includes("<b>") ? styles.bold : styles.paragraph}>{item.replaceAll("<b>", "").replaceAll("</b>","").replaceAll(" ","\u00A0")}</Text>)) : <Text>Loading...</Text>}
 				</Text>
 			</Page>
 		</Document>
